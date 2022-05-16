@@ -13,7 +13,7 @@ app.listen(3000, ()=>{
 
 client.connect();
 
-
+//GET all users route
 app.get('/users', (req, res)=>{
     client.query(`SELECT * FROM users`, (err, result)=>{
         if(!err){
@@ -24,6 +24,8 @@ app.get('/users', (req, res)=>{
 })
 
 
+
+//Get each user route
 app.get('/users/:id', (req, res)=>{
     client.query(`SELECT * FROM users WHERE id=${req.params.id}`, (err, result)=>{
         if(!err){
@@ -33,6 +35,9 @@ app.get('/users/:id', (req, res)=>{
     client.end;
 })
 
+
+
+//Post/Create route
 app.post('/users', (req, res)=> {
     const user = req.body;
     let insertQuery = `INSERT INTO users(id, firstname, lastname, location) 
@@ -57,6 +62,7 @@ app.post('/users', (req, res)=> {
 })
 
 
+//Put/Update route
 app.put('/users/:id', (req, res)=> {
     let user = req.body;
     let updateQuery = `UPDATE users
@@ -83,6 +89,9 @@ app.put('/users/:id', (req, res)=> {
 
 
 
+
+
+//DELETE route
 app.delete('/users/:id', (req, res)=> {
     
     let insertQuery = `DELETE FROM users WHERE id=${req.params.id}`
